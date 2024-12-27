@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko-db
+  namespace: builder
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    args: ["--context=git://gitlab.com/ignw1/dvs-code/pedemo/rhos-aws-pedemo.git#refs/heads/Add_GitOps",
+            "--context-sub-path=demo-containers",
+            "--dockerfile=Dockerfile-db",
+            "--destination=registry.gitlab.com/ignw1/dvs-code/pedemo/rhos-aws-pedemo/condb:v1.1"]
+    volumeMounts:
+      - name: kaniko-secret
+        mountPath: /kaniko/.docker
+    env:
+      - name: GIT_PASSWORD
+        value: "<personal access token with repo read permissions>"
+  restartPolicy: Never
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: gitlab-repo-registry-secret
+        items:
+          - key: .dockerconfigjson
+            path: config.json

@@ -1,0 +1,10 @@
+Flask
+Jinja2
+jsonschema
+more-itertools
+python-dateutil
+python-decouple
+requests
+requests-toolbelt
+uritemplate
+urllib3

@@ -1,0 +1,10 @@
+{
+    "auths": {
+        "https://registry.gitlab.com": {
+            "username": "kaniko-builder",
+            "password": "21zyxVfHKs4gDzSHjHiH",
+            "email": "kaniko-builder@ignw.io",
+            "auth": "a2FuaWtvLWJ1aWxkZXI6MjF6eXhWZkhLczRnRHpTSGpIaUgK"
+    	}
+    }
+}

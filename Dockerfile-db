@@ -1,0 +1,22 @@
+FROM python:3.11-slim-bullseye
+
+RUN mkdir /webby
+WORKDIR /webby
+
+# OS updates and base requirements for Webby application in general
+RUN apt-get update
+RUN apt-get install -y libssl-dev 
+RUN apt-get install -y build-essential
+
+# Python reqruiements for all of the Webby application
+COPY requirements.txt /webby
+RUN pip3 install -r requirements.txt
+
+# Tier container specific content
+ADD ./static /webby/static
+ADD ./templates /webby/templates
+COPY db.py /webby
+
+RUN chmod 755 -R *
+EXPOSE 8888
+CMD python3 /webby/db.py
